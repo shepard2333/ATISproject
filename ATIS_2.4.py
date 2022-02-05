@@ -157,7 +157,7 @@ while True:
     metar = genfromtxt('decodedata_metar.csv', dtype=str, delimiter='@')
     taf = genfromtxt('decodedata_taf.csv', dtype=str, delimiter='@')
     metar = np.insert(metar, 0, 'Current UTC time is: ' + ztime)
-    metar = np.insert(metar, 0, 'Current local time is: ' + localtime)
+    metar = np.insert(metar, 0, 'Current local time is: ' + localtime) 
 
     user_check = input('\ndo you want to print the data?\n \n是否要打印？\n (Y /N)')
     if user_check.lower() == 'y' or user_check.lower() == 'yes':
