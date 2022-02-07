@@ -8,20 +8,23 @@ import numpy as np
 from numpy import genfromtxt
 from PIL import Image, ImageDraw, ImageFont
 
-print('⠄⠄⠄⠄⠄⠄⢠⣿⣋⣿⣿⣉⣿⣿⣯⣧⡰⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄')
-print('⠄⠄⠄⠄⠄⠄⣿⣿⣹⣿⣿⣏⣿⣿⡗⣿⣿⠁⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄')
-print('⠄⠄⠄⠄⠄⠄⠟⡛⣉⣭⣭⣭⠌⠛⡻⢿⣿⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄')
-print('⠄⠄⠄⠄⠄⠄⠄⠄⣤⡌⣿⣷⣯⣭⣿⡆⣈⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄')
-print('⠄⠄⠄⠄⠄⠄⠄⢻⣿⣿⣿⣿⣿⣿⣿⣷⢛⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄')
-print('⠄⠄⠄⠄⠄⠄⠄⠄⢻⣷⣽⣿⣿⣿⢿⠃⣼⣧⣀⠄⠄⠄⠄⠄⠄⠄⠄⠄')
-print('⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⣛⣻⣿⠟⣀⡜⣻⢿⣿⣿⣶⣤⡀⠄⠄⠄⠄⠄')
-print('⠄⠄⠄⠄⠄⠄⠄⠄⢠⣤⣀⣨⣥⣾⢟⣧⣿⠸⣿⣿⣿⣿⣿⣤⡀⠄⠄⠄')
-print('⠄⠄⠄⠄⠄⠄⠄⠄⢟⣫⣯⡻⣋⣵⣟⡼⣛⠴⣫⣭⣽⣿⣷⣭⡻⣦⡀⠄')
-print('⠄⠄⠄⠄⠄⠄⠄⢰⣿⣿⣿⢏⣽⣿⢋⣾⡟⢺⣿⣿⣿⣿⣿⣿⣷⢹⣷⠄')
-print('⠄⠄⠄⠄⠄⠄⠄⣿⣿⣿⢣⣿⣿⣿⢸⣿⡇⣾⣿⠏⠉⣿⣿⣿⡇⣿⣿⡆')
-print('⠄⠄⠄⠄⠄⠄⠄⣿⣿⣿⢸⣿⣿⣿⠸⣿⡇⣿⣿⡆⣼⣿⣿⣿⡇⣿⣿⡇')
-print('⠇⢀⠄⠄⠄⠄⠄⠘⣿⣿⡘⣿⣿⣷⢀⣿⣷⣿⣿⡿⠿⢿⣿⣿⡇⣩⣿⡇')
-print('⣿⣿⠃⠄⠄⠄⠄⠄⠄⢻⣷⠙⠛⠋⣿⣿⣿⣿⣿⣷⣶⣿⣿⣿⡇⣿⣿⡇')
+with open('ICAO.txt','r') as f:
+    lines = f.readlines()
+    content = f.readlines()
+    for line in lines:
+        print(line,end="")
+
+with open('yn.txt','r') as f:
+    lines = f.readlines()
+    content = f.readlines()
+    for yn in lines:
+        print(yn,end="")
+
+with open('taf.txt','r') as f:
+    lines = f.readlines()
+    content = f.readlines()
+    for tafyn in lines:
+        print(yn,end="")
 
 # Copyrights©Shepard Deng VATSIM ID 1434656 and Hunyx, not for commercial use, For
 # fight simulation only, do not use for actual flight
@@ -82,13 +85,12 @@ def convert_img(data, count, is_raw):
 def raw_data():
     # 使用 ZUUU KIWA KLAX KPHX 作为测试航站
     # Use ZUUU KIWA KLAX KPHX for testing
-    print('输入查询的航站,type in the station you want to check')
-    stationx = input("请输入输入查询的航站：")
+    
+    stationx = line
     if len(stationx) != 4:
         print('ERROR: The station code must be four digits / 航站代码必须为四位')
         return
-    print('checking for ' + stationx)
-    print('正在查询' + stationx + '航站')
+    
     kv = {'data?ids': 'KIWA'}
     r = requests.get("https://www.aviationweather.gov/metar/data?ids=" + stationx +
                      "&format=raw&date=&hours=0&taf=on", params=kv)
@@ -115,11 +117,9 @@ def raw_data():
 
 # get the decoded data
 def decode_data():
-    print('使用 ZUUU WSSS KIWA KLAX KJFK作为测试航站')
     # 使用   ZUUU KIWA KLAX KPHX 作为测试航站
     # Use    ZUUU KIWA KLAX KPHX for testing
-    print('输入查询的航站,type in the station you want to check')
-    stationx = input("请输入输入查询的航站：")
+    stationx = line
     if len(stationx) != 4:
         print('ERROR: The station code must be four digits / 航站代码必须为四位')
         error = True
@@ -164,10 +164,10 @@ def main():
     is_raw = True
 
     while True:
-        print('decoded? 是否解码? (Y/N)')
+        
         # 如需解码则使用另外的爬虫网址
         # if decoded is needed then the format needs to be changed to raw
-        alpha = input("请输入是否解码? (Y/N)：")
+        alpha = yn
         # 不解码
         if 'y' != alpha:
             source_raw_metar, source_raw_taf = raw_data()
@@ -210,41 +210,36 @@ def main():
                             writer.writerow([key])
 
         # 打印
-        user_check = input('\ndo you want to print the data?\n \n是否要打印？\n (Y /N)')
-        if user_check.lower() == 'y' or user_check.lower() == 'yes':
-            # print raw data
-            if is_raw:
-                rawdata_1 = genfromtxt('rawdata_metar.csv', dtype=str, delimiter='@')
-                rawdata_2 = genfromtxt('rawdata_taf.csv', dtype=str, delimiter='@')
-                rawdata = np.array([rawdata_1, rawdata_2], dtype=str)
-                rawdata = np.insert(rawdata, 0, 'Current UTC time is: ' + ztime)
-                rawdata = np.insert(rawdata, 0, 'Current local time is: ' + localtime)
-                convert_img(rawdata, 1, is_raw)
-            # print decoded data
-            if not is_raw:
-                metar = genfromtxt('decodedata_metar.csv', dtype=str, delimiter='@')
-                taf = genfromtxt('decodedata_taf.csv', dtype=str, delimiter='@')
-                metar = np.insert(metar, 0, 'Current UTC time is: ' + ztime)
-                metar = np.insert(metar, 0, 'Current local time is: ' + localtime)
-                convert_img(metar, 1, is_raw)
-                # 打印taf
-                user_check = input('\ndo you want to print taf?\n \n是否要打印taf？\n (Y /N)')
-                if user_check.lower() == 'y' or user_check.lower() == 'yes':
-                    count = 0
-                    taf_cut = np.array([])
-                    for row in range(taf.shape[0]):
-                        temp = taf[row]
-                        if 'Text' in temp:  # only print the first Taf
-                            count = count + 1
-                        if count >= 2:
-                            break
-                        taf_cut = np.append(taf_cut, temp)
-                    convert_img(taf_cut, 2, is_raw)
-
-        user_check = input('\ndo you want to continue checking?\n \n继续查询？\n (Y /N)')
-        if user_check.lower() == 'n' or user_check.lower() == 'no':
-            print('have a good day')
-            break
+        # print raw data
+        if is_raw:
+            rawdata_1 = genfromtxt('rawdata_metar.csv', dtype=str, delimiter='@')
+            rawdata_2 = genfromtxt('rawdata_taf.csv', dtype=str, delimiter='@')
+            rawdata = np.array([rawdata_1, rawdata_2], dtype=str)
+            rawdata = np.insert(rawdata, 0, 'Current UTC time is: ' + ztime)
+            rawdata = np.insert(rawdata, 0, 'Current local time is: ' + localtime)
+            convert_img(rawdata, 1, is_raw)
+        # print decoded data
+        if not is_raw:
+            metar = genfromtxt('decodedata_metar.csv', dtype=str, delimiter='@')
+            taf = genfromtxt('decodedata_taf.csv', dtype=str, delimiter='@')
+            metar = np.insert(metar, 0, 'Current UTC time is: ' + ztime)
+            metar = np.insert(metar, 0, 'Current local time is: ' + localtime)
+            convert_img(metar, 1, is_raw)
+            # 打印taf
+            user_check = tafyn
+            if user_check.lower() == 'y' or user_check.lower() == 'yes':
+                count = 0
+                taf_cut = np.array([])
+                for row in range(taf.shape[0]):
+                    temp = taf[row]
+                    if 'Text' in temp:  # only print the first Taf
+                        count = count + 1
+                    if count >= 2:
+                        break
+                    taf_cut = np.append(taf_cut, temp)
+                convert_img(taf_cut, 2, is_raw)
+        break    
+            
 
 
 if __name__ == '__main__':
