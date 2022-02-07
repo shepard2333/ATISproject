@@ -57,7 +57,7 @@ x = Label(win, text = "Input ICAO Code")
 x.pack()
 
 def run():
-    os.system('python atis2.5.py')
+    os.system('python ATIS.py')
 
 
 
